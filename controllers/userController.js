@@ -19,6 +19,10 @@ async function addUser(req, res) {
 }
 
 async function getUser(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const users = await userModel.getUser(req.params.id);
 
     const userData = {
@@ -38,10 +42,14 @@ async function updateUser(req,res) {
     await userModel.updateUser({
         name: req.body.name ,
         email: req.body.email
-    }, req.param.id);
+    }, req.params.id);
 }
 
 async function deleteUser(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const result = await userModel.deleteUser(req.params.id);
     res.json(result);
 }
