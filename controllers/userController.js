@@ -1,9 +1,15 @@
 const userModel = require('./../models/userModel');
+const { validationResult } = require('express-validator');
+
 async function healthCheck(req, res) {
     res.json({'working': true})
 }
 
 async function addUser(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const data = [
         req.body.name,
         req.body.email
