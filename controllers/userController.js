@@ -13,7 +13,7 @@ async function addUser(req, res) {
 }
 
 async function getUser(req, res) {
-    const users = await userModel.getUser(req.param.id);
+    const users = await userModel.getUser(req.params.id);
 
     const userData = {
         ...users[0],
@@ -25,23 +25,20 @@ async function getUser(req, res) {
             day: 'numeric'
         })
     };
-    res.render('user-detail', {user: userData});
-
-      }  
+    res.json({user: userData});
+}  
    
-
-   async function updateUser(req,res) {
+async function updateUser(req,res) {
     await userModel.updateUser({
         name: req.body.name ,
         email: req.body.email
     }, req.param.id);
-    res.redirect('/users');
-    }
-   
-    async function deleteUser(req, res) {
-        await userModel.deleteUser(req.params.id);
-        res.redirect('/users');
-    }
+}
+
+async function deleteUser(req, res) {
+    const result = await userModel.deleteUser(req.params.id);
+    res.json(result);
+}
 
 module.exports = {
     healthCheck, addUser, getUser, updateUser, deleteUser

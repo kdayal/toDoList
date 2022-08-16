@@ -35,16 +35,17 @@ async function updateUser(user,id) {
     }
 
 }
-async function deletUser(id) {
+async function deleteUser(id) {
     try {
-        await db.query('DELET FROM users WHERE id = ?', [id]);
+        const result = await db.query('DELETE FROM users WHERE id = ?', [id]);
+        return {affectedRows: result[0].affectedRows};
     } catch (error) {
         console.log(error);
     }
 }
 
 module.exports = {
-    addUser , getUser , updateUser , deletUser
+    addUser , getUser , updateUser , deleteUser
 };
 
     
