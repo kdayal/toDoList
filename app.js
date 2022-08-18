@@ -3,11 +3,14 @@ const express = require('express');
 const app = express();
 
 const userRoutes = require('./routes/user.js');
+const listRoutes = require('./routes/list.js')
 
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies
 
+
 // express middleware
 app.use(userRoutes);
+app.use(listRoutes);
 
 const PORT = 3001;
  
