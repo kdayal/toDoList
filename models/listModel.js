@@ -35,7 +35,18 @@ async function updateList(list, id) {
         console.log(error);
     }
 }
+async function deleteList(id) {
+    try {
+        const result = await db.query(`
+            DELETE FROM listItems WHERE list_id = ?;
+            DELETE FROM lists WHERE id = ?;
+        `, [id, id]);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
-    addList , getList , updateList
+    addList , getList , updateList , deleteList
 }

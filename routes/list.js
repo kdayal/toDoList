@@ -17,4 +17,8 @@ router.put('/list/:id',
     param('id').notEmpty().isInt({min:1}),
     listController.updateList
 );
+router.delete('/list/:id',
+    param('id').notEmpty().isInt({min:1}),
+    listController.deleteList
+);
 module.exports = router;

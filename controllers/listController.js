@@ -44,7 +44,15 @@ async function updateList(req,res) {
     }, req.params.id);
     res.json(result);
 }
+async function deleteList(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const result = await listModel.deleteList(req.params.id);
+    res.json(result);
+}
 
 module.exports = {
-    addList, getList, updateList
+    addList, getList, updateList ,deleteList
 }
