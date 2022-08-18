@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require("helmet");
 const app = express();
 
 const userRoutes = require('./routes/user.js');
@@ -9,6 +10,7 @@ app.use(express.urlencoded({ extended: true })); // Parse incoming request bodie
 
 
 // express middleware
+app.use(helmet());
 app.use(userRoutes);
 app.use(listRoutes);
 
