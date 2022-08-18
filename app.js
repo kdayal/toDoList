@@ -4,15 +4,16 @@ const helmet = require("helmet");
 const app = express();
 
 const userRoutes = require('./routes/user.js');
-const listRoutes = require('./routes/list.js')
+const listRoutes = require('./routes/list.js');
+const listItemRoutes = require('./routes/listItem.js');
 
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies
-
 
 // express middleware
 app.use(helmet());
 app.use(userRoutes);
 app.use(listRoutes);
+app.use(listItemRoutes);
 
 const PORT = 3001;
  
