@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  CONSTRAINT uc_user UNIQUE (`name`, email)
+  CONSTRAINT uc_user_email UNIQUE (email)
 ) ENGINE=InnoDB;
 
 -- one to many relationships with users
