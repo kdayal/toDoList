@@ -13,5 +13,8 @@ router.get('/list/:id',
     param('id').notEmpty().isInt({min:1}),
     listController.getList
 );
-
+router.put('/list/:id', 
+    param('id').notEmpty().isInt({min:1}),
+    listController.updateList
+);
 module.exports = router;

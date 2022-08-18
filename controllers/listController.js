@@ -32,7 +32,19 @@ async function getList(req, res) {
     };
     res.json({list: listData});
 }  
+async function updateList(req,res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const result = await listModel.updateList({
+        name: req.body.name ,
+        userId: req.body.userId
+    }, req.params.id);
+    res.json(result);
+}
 
 module.exports = {
-    addList, getList
+    addList, getList, updateList
 }

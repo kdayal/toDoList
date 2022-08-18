@@ -23,7 +23,19 @@ async function getList(id) {
         console.log(error);
     }
 }
+async function updateList(list, id) {
+    try {
+        const query = `
+        UPDATE lists SET name = ? , user_id = ?
+        WHERE id = ?
+        `;
+        const result = await db.query(query, [list.name, list.userId, id]);
+        return {affectedRows: result[0].affectedRows};
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
-    addList , getList
+    addList , getList , updateList
 }
