@@ -39,10 +39,16 @@ async function getUser(req, res) {
 }  
    
 async function updateUser(req,res) {
-    await userModel.updateUser({
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const result = await userModel.updateUser({
         name: req.body.name ,
         email: req.body.email
     }, req.params.id);
+    res.json(result);
 }
 
 async function deleteUser(req, res) {

@@ -29,7 +29,8 @@ async function updateUser(user,id) {
         UPDATE users SET name = ? , email = ?
         WHERE id = ?
         `;
-        await db.query(query, [user.name, user.email, id]);
+        const result = await db.query(query, [user.name, user.email, id]);
+        return {affectedRows: result[0].affectedRows};
     } catch (error) {
         console.log(error);
     }

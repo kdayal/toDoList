@@ -18,5 +18,9 @@ router.delete('/user/:id',
     param('id').notEmpty().isInt({min:1}),
     userController.deleteUser
 );
+router.put('/user/:id',
+    param('id').notEmpty().isInt({min:1}),
+    userController.updateUser
+);
 
 module.exports = router;
