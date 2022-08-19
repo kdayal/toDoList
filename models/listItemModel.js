@@ -12,6 +12,16 @@ async function addListItem(postData) {
         console.log(error);
     }
 }
+async function getListItem(id) {
+    try {
+        const query = `
+        SELECT * FROM listItems WHERE id = ? `;
+        const [listItems] = await db.query(query, [id]);
+        return listItems;
+    } catch(error) {
+        console.log(error);
+    }
+}
 module.exports  = {
-    addListItem
+    addListItem , getListItem
 }

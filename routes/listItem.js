@@ -11,4 +11,9 @@ router.post('/listitems',
     body('name').trim().escape().not().isEmpty(),
     listItemController.addListItem
 );
+
+router.get('/listItems/:id', 
+    param('id').notEmpty().isInt({min:1}),
+    listItemController.getListItem
+);
 module.exports = router;
