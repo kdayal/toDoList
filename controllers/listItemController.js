@@ -34,6 +34,28 @@ async function getListItem(req, res) {
     };
     res.json({listItem: listItemData});
 }  
+async function updateListItem(req,res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const result = await listItemModel.updateListItem({
+        name: req.body.name ,
+        listId: req.body.listId,
+        status: req.body.status,
+        priority: req.body.priority
+    }, req.params.id);
+    res.json(result);
+}
+async function deleteListItem(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const result = await listItemModel.deleteListItem(req.params.id);
+    res.json(result);
+}
 module.exports = {
-    addListItem ,getListItem
+    addListItem ,getListItem , updateListItem , deleteListItem
 }

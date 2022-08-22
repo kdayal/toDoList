@@ -4,7 +4,7 @@ const { body, param } = require('express-validator');
 
 const listItemController = require('../controllers/listItemController');
 
-router.post('/listitems',
+router.post('/listItems',
     body('listId').trim().escape().not().isEmpty(),
     body('status').trim().escape().not().isEmpty(),
     body('priority').trim().escape().not().isEmpty(),
@@ -12,8 +12,20 @@ router.post('/listitems',
     listItemController.addListItem
 );
 
-router.get('/listItems/:id', 
+router.get('/listItem/:id', 
     param('id').notEmpty().isInt({min:1}),
     listItemController.getListItem
+);
+router.put('/listItem/:id', 
+    param('id').notEmpty().isInt({min:1}),
+    body('listId').trim().escape().not().isEmpty(),
+    body('status').trim().escape().not().isEmpty(),
+    body('priority').trim().escape().not().isEmpty(),
+    body('name').trim().escape().not().isEmpty(),
+    listItemController.updateListItem
+);
+router.delete('/listItem/:id',
+    param('id').notEmpty().isInt({min:1}),
+    listItemController.deleteListItem
 );
 module.exports = router;

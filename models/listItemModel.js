@@ -22,6 +22,29 @@ async function getListItem(id) {
         console.log(error);
     }
 }
+async function updateListItem(listItem, id) {
+    try {
+        const query = `
+        UPDATE listItems SET name = ? , list_id = ?
+        WHERE id = ?
+        `;
+        const result = await db.query(query, [listItem.name, listItem.listId, id]);
+        return {affectedRows: result[0].affectedRows};
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function deleteListItem(id) {
+    try {
+        const result = await db.query(`
+            DELETE FROM listItemComments WHERE list_item_id = ?;
+            DELETE FROM listItems WHERE id = ?;
+        `, [id, id]);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 module.exports  = {
-    addListItem , getListItem
+    addListItem , getListItem, updateListItem , deleteListItem
 }
