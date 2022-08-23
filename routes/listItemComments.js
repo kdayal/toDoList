@@ -11,4 +11,8 @@ router.post('/listItemsComments',
    // body('name').trim().escape().not().isEmpty(),
     listItemCommentsController.addListItemComments
 );
+router.get('/listItemComments/:id', 
+    param('id').notEmpty().isInt({min:1}),
+    listItemCommentsController.getListItemComments
+);
 module.exports = router

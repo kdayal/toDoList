@@ -12,6 +12,16 @@ async function addListItemComments(postData) {
         console.log(error);
     }
 }
+async function getListItemComments(id) {
+    try {
+        const query = `
+        SELECT * FROM listItemComments WHERE id = ? `;
+        const [listItemsComments] = await db.query(query, [id]);
+        return listItemsComments;
+    } catch(error) {
+        console.log(error);
+    }
+}
 module.exports  = {
-    addListItemComments
+    addListItemComments , getListItemComments
 }
